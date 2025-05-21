@@ -73,11 +73,16 @@ class GitHubService
         $repository = $repository ?? $this->repository;
         $cacheKey = "filament-easy-footer.github.{$repository}.latest-tag";
 
-        return Cache::remember(
-            $cacheKey,
-            $this->cacheTtl,
-            fn () => $this->fetchLatestTag($repository) ?? $this->defaultVersion
-        );
+        $cachedTag = $this->getCacheWithoutTags($cacheKey);
+        if ($cachedTag !== null) {
+            return $cachedTag;
+        }
+
+        $tag = $this->fetchLatestTag($repository) ?? $this->defaultVersion;
+
+        $this->setCacheWithoutTags($cacheKey, $tag, $this->cacheTtl);
+
+        return $tag;
     }
 
     protected function fetchLatestTag(string $repository): ?string
@@ -102,5 +107,25 @@ class GitHubService
         }
 
         return null;
+    }
+
+    protected function getCacheWithoutTags(string $key)
+    {
+        try {
+            return Cache::store(config('cache.default'))->get($key);
+        } catch (\Exception $e) {
+            report($e);
+
+            return null;
+        }
+    }
+
+    protected function setCacheWithoutTags(string $key, $value, int $ttl): void
+    {
+        try {
+            Cache::store(config('cache.default'))->put($key, $value, $ttl);
+        } catch (\Exception $e) {
+            report($e);
+        }
     }
 }
