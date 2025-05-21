@@ -115,6 +115,7 @@ class GitHubService
             return Cache::store(config('cache.default'))->get($key);
         } catch (\Exception $e) {
             report($e);
+
             return null;
         }
     }
