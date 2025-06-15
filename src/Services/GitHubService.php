@@ -2,6 +2,7 @@
 
 namespace Devonab\FilamentEasyFooter\Services;
 
+use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -102,7 +103,7 @@ class GitHubService
                 return $tagsResponse->json()[0]['name'];
             }
 
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
         }
 
@@ -113,7 +114,7 @@ class GitHubService
     {
         try {
             return Cache::store(config('cache.default'))->get($key);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
 
             return null;
@@ -124,7 +125,7 @@ class GitHubService
     {
         try {
             Cache::store(config('cache.default'))->put($key, $value, $ttl);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
         }
     }
