@@ -2,6 +2,7 @@
 
 namespace Devonab\FilamentEasyFooter;
 
+use Throwable;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -112,7 +113,7 @@ class EasyFooterPlugin implements Plugin
     /**
      * Render the footer view
      *
-     * @throws \Throwable
+     * @throws Throwable
      */
     protected function renderFooter(float $startTime): string
     {

@@ -8,7 +8,8 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)[![Total Downloads](https://img.shields.io/packagist/dt/devonab/filament-easy-footer.svg?style=flat-square)](https://packagist.org/packages/devonab/filament-easy-footer)
 
-
+> [!NOTE]  
+> You're using Filament `3.x` ? you can check out the compatible version [here](https://github.com/Devonab/filament-easy-footer/tree/filament-v3).
 
 This filament Plugin provides an easy and flexible way to add a customizable footer to your FilamentPHP application. This plugin integrates seamlessly with Filament's admin interface, enabling you to enhance your application's user experience with a good looking footer.
 
@@ -18,6 +19,7 @@ This filament Plugin provides an easy and flexible way to add a customizable foo
 
 - [Installation](#installation)
 - [Usage](#usage)
+    - [Custom theme](#custom-theme)
 - [Configurations](#configurations)
     - [Enable or Disable the Footer](#enable-or-disable-the-footer) 
     - [Footer position](#footer-position)
@@ -77,6 +79,7 @@ return [
 
 To start using this plugin, simply add it to the Filament provider's plugin array.
 
+
 ```php
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 
@@ -84,6 +87,19 @@ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
     EasyFooterPlugin::make(),
 ])
 ```
+
+### Custom theme
+
+---
+
+You will need to create a [custom theme](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) for the footer styles to be applied correctly.
+
+Once that is done, add this line to your theme.css file before compiling everything with `npm run build`.
+
+```css
+@source '../../../../vendor/devonab/filament-easy-footer/resources/views/**/*';
+```
+
 
 ## Configurations
 

@@ -1,7 +1,6 @@
 @php
-    use Filament\Support\Enums\MaxWidth;
-
-@endphp
+    use Filament\Support\Enums\Width;
+    @endphp
 <footer
     @class([
         'fi-footer my-3 flex flex-wrap items-center justify-center text-sm text-gray-500 dark:text-gray-400',
@@ -9,28 +8,28 @@
         'fi-sidebar gap-2' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer',
         'gap-4' => $footerPosition !== 'sidebar' && $footerPosition !== 'sidebar.footer',
         'mx-auto w-full px-4 md:px-6 lg:px-8' => $footerPosition === 'footer',
-        match ($maxContentWidth ??= (filament()->getMaxContentWidth() ?? MaxWidth::SevenExtraLarge)) {
-            MaxWidth::ExtraSmall, 'xs' => 'max-w-xs',
-            MaxWidth::Small, 'sm' => 'max-w-sm',
-            MaxWidth::Medium, 'md' => 'max-w-md',
-            MaxWidth::Large, 'lg' => 'max-w-lg',
-            MaxWidth::ExtraLarge, 'xl' => 'max-w-xl',
-            MaxWidth::TwoExtraLarge, '2xl' => 'max-w-2xl',
-            MaxWidth::ThreeExtraLarge, '3xl' => 'max-w-3xl',
-            MaxWidth::FourExtraLarge, '4xl' => 'max-w-4xl',
-            MaxWidth::FiveExtraLarge, '5xl' => 'max-w-5xl',
-            MaxWidth::SixExtraLarge, '6xl' => 'max-w-6xl',
-            MaxWidth::SevenExtraLarge, '7xl' => 'max-w-7xl',
-            MaxWidth::Full, 'full' => 'max-w-full',
-            MaxWidth::MinContent, 'min' => 'max-w-min',
-            MaxWidth::MaxContent, 'max' => 'max-w-max',
-            MaxWidth::FitContent, 'fit' => 'max-w-fit',
-            MaxWidth::Prose, 'prose' => 'max-w-prose',
-            MaxWidth::ScreenSmall, 'screen-sm' => 'max-w-screen-sm',
-            MaxWidth::ScreenMedium, 'screen-md' => 'max-w-screen-md',
-            MaxWidth::ScreenLarge, 'screen-lg' => 'max-w-screen-lg',
-            MaxWidth::ScreenExtraLarge, 'screen-xl' => 'max-w-screen-xl',
-            MaxWidth::ScreenTwoExtraLarge, 'screen-2xl' => 'max-w-screen-2xl',
+        match ($maxContentWidth ??= (filament()->getMaxContentWidth() ?? Width::SevenExtraLarge)) {
+            Width::ExtraSmall, 'xs' => 'max-w-xs',
+            Width::Small, 'sm' => 'max-w-sm',
+            Width::Medium, 'md' => 'max-w-md',
+            Width::Large, 'lg' => 'max-w-lg',
+            Width::ExtraLarge, 'xl' => 'max-w-xl',
+            Width::TwoExtraLarge, '2xl' => 'max-w-2xl',
+            Width::ThreeExtraLarge, '3xl' => 'max-w-3xl',
+            Width::FourExtraLarge, '4xl' => 'max-w-4xl',
+            Width::FiveExtraLarge, '5xl' => 'max-w-5xl',
+            Width::SixExtraLarge, '6xl' => 'max-w-6xl',
+            Width::SevenExtraLarge, '7xl' => 'max-w-7xl',
+            Width::Full, 'full' => 'max-w-full',
+            Width::MinContent, 'min' => 'max-w-min',
+            Width::MaxContent, 'max' => 'max-w-max',
+            Width::FitContent, 'fit' => 'max-w-fit',
+            Width::Prose, 'prose' => 'max-w-prose',
+            Width::ScreenSmall, 'screen-sm' => 'max-w-screen-sm',
+            Width::ScreenMedium, 'screen-md' => 'max-w-screen-md',
+            Width::ScreenLarge, 'screen-lg' => 'max-w-screen-lg',
+            Width::ScreenExtraLarge, 'screen-xl' => 'max-w-screen-xl',
+            Width::ScreenTwoExtraLarge, 'screen-2xl' => 'max-w-screen-2xl',
             default => $maxContentWidth,
         } => $footerPosition === 'footer',
     ])
@@ -86,7 +85,9 @@
         <ul class="gap-2 flex">
             @foreach($links as $link)
                 <li>
-                    <a href="{{ $link['url'] }}" class="text-primary-600 dark:text-primary-400 hover:text-primary-600 dark:hover:text-primary-300" target="_blank">{{ $link['title'] }}</a>
+                    <a href="{{ $link['url'] }}"
+                       class="text-primary-600 dark:text-primary-400 hover:text-primary-600 dark:hover:text-primary-300"
+                       target="_blank">{{ $link['title'] }}</a>
                 </li>
             @endforeach
         </ul>
