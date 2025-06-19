@@ -9,7 +9,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)[![Total Downloads](https://img.shields.io/packagist/dt/devonab/filament-easy-footer.svg?style=flat-square)](https://packagist.org/packages/devonab/filament-easy-footer)
 
 > [!NOTE]  
-> You're using Filament `4.x` ? you can check out the compatible version [here](https://github.com/Devonab/filament-easy-footer/tree/filament-v3).
+> You're using Filament `4.x` ? you can check out the compatible version [here](https://github.com/Devonab/filament-easy-footer/tree/main).
 
 This filament Plugin provides an easy and flexible way to add a customizable footer to your FilamentPHP application. This plugin integrates seamlessly with Filament's admin interface, enabling you to enhance your application's user experience with a good looking footer.
 
