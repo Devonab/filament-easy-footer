@@ -45,7 +45,7 @@ This filament Plugin provides an easy and flexible way to add a customizable foo
 First, you can start to install the package via composer:
 
 ```bash
-composer require devonab/filament-easy-footer
+composer require devonab/filament-easy-footer:^2.0
 ```
 
 You can publish the config file with:
