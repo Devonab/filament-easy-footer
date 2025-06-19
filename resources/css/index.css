@@ -1,4 +1,4 @@
-@import '../../vendor/filament/filament/resources/css/theme.css';
+@import '../../../../../vendor/filament/filament/resources/css/theme.css';
 
 .fi-footer > span {
     @apply text-center;
