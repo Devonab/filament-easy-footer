@@ -2,11 +2,11 @@
 
 namespace Devonab\FilamentEasyFooter;
 
-use Throwable;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Illuminate\Support\HtmlString;
+use Throwable;
 
 class EasyFooterPlugin implements Plugin
 {
