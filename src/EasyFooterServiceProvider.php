@@ -60,11 +60,6 @@ class EasyFooterServiceProvider extends PackageServiceProvider
 
         Livewire::component('devonab.filament-easy-footer.github-version', GitHubVersion::class);
 
-        FilamentAsset::register(
-            $this->getAssets(),
-            $this->getAssetPackageName()
-        );
-
         FilamentAsset::registerScriptData(
             $this->getScriptData(),
             $this->getAssetPackageName()
@@ -84,18 +79,6 @@ class EasyFooterServiceProvider extends PackageServiceProvider
     protected function getAssetPackageName(): ?string
     {
         return 'devonab/filament-easy-footer';
-    }
-
-    /**
-     * @return array<Asset>
-     */
-    protected function getAssets(): array
-    {
-        return [
-            // AlpineComponent::make('filament-easy-footer', __DIR__ . '/../resources/dist/components/filament-easy-footer.js'),
-            Css::make('filament-easy-footer-styles', __DIR__ . '/../resources/dist/filament-easy-footer.css'),
-            Js::make('filament-easy-footer-scripts', __DIR__ . '/../resources/dist/filament-easy-footer.js'),
-        ];
     }
 
     /**

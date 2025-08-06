@@ -5,7 +5,7 @@
     @class([
         'fi-footer my-3 flex flex-wrap items-center justify-center text-sm text-gray-500 dark:text-gray-400',
         'border-t border-gray-200 dark:border-gray-700 text-center p-2' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer' || $borderTopEnabled === true,
-        'fi-sidebar gap-2' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer',
+        'fi-sidebar gap-2 h-auto' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer',
         'gap-4' => $footerPosition !== 'sidebar' && $footerPosition !== 'sidebar.footer',
         'mx-auto w-full px-4 md:px-6 lg:px-8' => $footerPosition === 'footer',
         match ($maxContentWidth ??= (filament()->getMaxContentWidth() ?? Width::SevenExtraLarge)) {
