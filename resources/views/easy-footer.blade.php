@@ -42,7 +42,7 @@
                 {{ $sentence }}
             @endif
         @else
-            {{ config('filament-easy-footer.app_name') }}
+            {{ config('filament-easy-footer.app_name') ?? config('app.name') }}
         @endif
     </span>
 

@@ -48,7 +48,7 @@ First, you can start to install the package via composer:
 composer require devonab/filament-easy-footer:^2.0
 ```
 
-You can publish the config file with:
+You can publish the config file with. This file is needed if you want to change the default:
 
 ```bash
 php artisan vendor:publish --tag="filament-easy-footer-config"
@@ -64,11 +64,12 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'app_name' => env('APP_NAME', 'Filament Footer'),
+    'app_name' => null,
+
     'github' => [
-        'repository' => env('GITHUB_REPOSITORY', ''),
-        'token' => env('GITHUB_TOKEN', ''),
-        'cache_ttl' => env('GITHUB_CACHE_TTL', 3600)
+        'repository' => null,
+        'token' => null,
+        'cache_ttl' => 3600,
     ],
 ];
 ```
@@ -171,7 +172,7 @@ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 ### Custom sentence
 ![Filament Easy Footer custom sentence](https://raw.githubusercontent.com/Devonab/filament-easy-footer/main/art/custom_sentence.webp)
 
-By default, the plugin will display the name of your application (configured from your .ENV) next to the copyright. You can change the phrase by publishing the plugin configuration file.
+By default, the plugin will display the name of your application (configured from your .ENV), or the app_name key in the plugin config file,next to the copyright. You can change the phrase by publishing the plugin configuration file.
 
 If you prefer a more personalized approach, you can use the following method:
 
@@ -214,13 +215,20 @@ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 - showLogo : Display the GitHub logo next to the version
 - showUrl : Add an `<a>` tag to the Github URL around the logo
 
-To make this one work, you need to add this keys to our .env file :
+To make this one work, you need to publish the plugin configuration file and set the following keys :
 
-```bash
-GITHUB_REPOSITORY=user/name-of-the-repo
-GITHUB_TOKEN= # Recommended but not compulsory for all repos, required for private repos
-GITHUB_CACHE_TTL= # in seconds, 3600 by default
+```php
+return [
+    'app_name' => null,
+
+    'github' => [
+        'repository' => null, #user/name-of-the-repo
+        'token' => null, # Recommended but not compulsory for all repos, required for private repos
+        'cache_ttl' => 3600, # in seconds, 3600 by default
+    ],
+];
 ```
+
 If needed, you can generate a token [here](https://github.com/settings/personal-access-tokens). The token need to have at least the `read-only` permission on the "Contents" scope in Repository permissions.
 
 ### Load time
