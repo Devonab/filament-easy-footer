@@ -92,7 +92,7 @@ class EasyFooterServiceProvider extends PackageServiceProvider
             $ckey = $cfg['local_config_key'] ?? 'app.version';
 
             $fallback = match ($mode) {
-                'config' => fn (): ?string => (string) ($app['config']->get($ckey) ?? '') ?: null,
+                'config' => fn (): ?string => ($app['config']->get($ckey) ?? '') ?: null,
                 default => null,
             };
 
