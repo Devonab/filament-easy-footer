@@ -23,7 +23,6 @@ class GitHubVersion extends Component
 
     public ?UpdateInfo $updateInfo = null;
 
-
     public function mount(GitHubService $githubService, UpdateInfo $info): void
     {
         if (! $githubService->isEnabled()) {
