@@ -19,14 +19,14 @@ return [
 
         // keys for fallbacks
         'local_config_key' => 'app.version',
-        'local_env_key'    => 'APP_VERSION',
+        'local_env_key' => 'APP_VERSION',
 
         // optional labels for your view
         'labels' => [
             'installed' => 'Installed',
-            'latest'    => 'Latest',
+            'latest' => 'Latest',
             'updatable' => 'Update available',
-            'unknown'   => 'N/A',
+            'unknown' => 'N/A',
         ],
     ],
     'github' => [

@@ -19,8 +19,7 @@ final class VersionComparisonService implements VersionComparisonServiceInterfac
         private readonly VersionServiceInterface $localVersionService,
         private readonly VersionServiceInterface $remoteVersionService,
         private readonly VersionComparatorInterface $comparator
-    ) {
-    }
+    ) {}
 
     public function getUpdateInfo(): UpdateInfo
     {
