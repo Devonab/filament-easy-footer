@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Devonab\FilamentEasyFooter\Services\SemverVersionComparator;
 
 beforeEach(function () {
-    $this->cmp = new SemverVersionComparator();
+    $this->cmp = new SemverVersionComparator;
 });
 
 it('treats identical versions as equal', function () {
@@ -27,8 +27,8 @@ it('handles pre-release semantics with version_compare', function () {
 
 it('orders major/minor/patch as expected', function () {
     expect($this->cmp->isHigher('2.0.0', '1.9.9'))->toBeTrue() // major
-    ->and($this->cmp->isHigher('1.10.0', '1.9.9'))->toBeTrue() // minor
-    ->and($this->cmp->isHigher('1.2.4', '1.2.3'))->toBeTrue();  // patch
+        ->and($this->cmp->isHigher('1.10.0', '1.9.9'))->toBeTrue() // minor
+        ->and($this->cmp->isHigher('1.2.4', '1.2.3'))->toBeTrue();  // patch
 
 });
 

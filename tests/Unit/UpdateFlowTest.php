@@ -6,8 +6,8 @@ use Devonab\FilamentEasyFooter\Services\LocalVersionService;
 use Devonab\FilamentEasyFooter\Services\SemverVersionComparator;
 
 it('computes updatable correctly from installed and latest', function () {
-    $local = new LocalVersionService(fn() => 'v1.2.3');
-    $cmp = new SemverVersionComparator();
+    $local = new LocalVersionService(fn () => 'v1.2.3');
+    $cmp = new SemverVersionComparator;
 
     $installed = $local->getCurrentVersion();
     $latest = '1.3.0';
@@ -20,8 +20,8 @@ it('computes updatable correctly from installed and latest', function () {
 });
 
 it('reports not updatable when installed equals latest', function () {
-    $local = new LocalVersionService(fn() => '1.2.3');
-    $cmp = new SemverVersionComparator();
+    $local = new LocalVersionService(fn () => '1.2.3');
+    $cmp = new SemverVersionComparator;
 
     $installed = $local->getCurrentVersion();
     $latest = 'v1.2.3';

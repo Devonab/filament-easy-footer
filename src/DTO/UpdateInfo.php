@@ -14,8 +14,7 @@ final class UpdateInfo
         public readonly ?string $installed,
         public readonly ?string $latest,
         public readonly bool $updatable
-    ) {
-    }
+    ) {}
 
     public function displayInstalled(): ?string
     {
@@ -29,7 +28,10 @@ final class UpdateInfo
 
     private function normalize(?string $v): ?string
     {
-        if (!$v) return null;
+        if (! $v) {
+            return null;
+        }
+
         return str_starts_with($v, 'v') ? $v : 'v' . $v;
     }
 }

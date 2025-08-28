@@ -19,7 +19,7 @@ final class LocalVersionService implements VersionServiceInterface
 
     /**
      * @param  callable():(?string)|null  $fallback
-     *        Optional fallback if Composer does not return a version.
+     *                                               Optional fallback if Composer does not return a version.
      */
     public function __construct(?callable $fallback = null)
     {
@@ -44,6 +44,7 @@ final class LocalVersionService implements VersionServiceInterface
 
         if ($this->fallback !== null) {
             $version = ($this->fallback)();
+
             return is_string($version) && $version !== '' ? $version : null;
         }
 

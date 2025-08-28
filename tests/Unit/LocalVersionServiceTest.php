@@ -6,7 +6,7 @@ use Devonab\FilamentEasyFooter\Services\LocalVersionService;
 
 it('returns version from fallback when composer is not available', function () {
     // Arrange: define a deterministic fallback
-    $fallback = fn(): ?string => '1.2.3';
+    $fallback = fn (): ?string => '1.2.3';
 
     // Act
     $service = new LocalVersionService($fallback);
@@ -17,7 +17,7 @@ it('returns version from fallback when composer is not available', function () {
 });
 
 it('returns null when fallback returns empty/invalid', function () {
-    $fallback = fn(): ?string => '';
+    $fallback = fn (): ?string => '';
     $service = new LocalVersionService($fallback);
 
     expect($service->getCurrentVersion())->toBeNull();

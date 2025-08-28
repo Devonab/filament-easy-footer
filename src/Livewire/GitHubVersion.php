@@ -18,7 +18,9 @@ class GitHubVersion extends Component
 
     /** New fields for local control logic */
     public ?string $installed = null;
+
     public ?string $latest = null;
+
     public bool $updatable = false;
 
     public function mount(GitHubService $githubService, UpdateInfo $info): void
@@ -33,7 +35,7 @@ class GitHubVersion extends Component
 
         // Use UpdateInfo instead of calling GitHubService again
         $this->installed = $info->installed;
-        $this->latest    = $info->latest;
+        $this->latest = $info->latest;
         $this->updatable = $info->updatable;
 
         // Keep old $version for existing blade partials (BC: shows "latest")
