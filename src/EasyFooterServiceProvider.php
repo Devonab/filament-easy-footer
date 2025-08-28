@@ -90,11 +90,9 @@ class EasyFooterServiceProvider extends PackageServiceProvider
             $cfg = $app['config']->get('filament-easy-footer.versioning', []);
             $mode = $cfg['local_fallback'] ?? 'config';
             $ckey = $cfg['local_config_key'] ?? 'app.version';
-            $ekey = $cfg['local_env_key'] ?? 'APP_VERSION';
 
             $fallback = match ($mode) {
                 'config' => fn (): ?string => (string) ($app['config']->get($ckey) ?? '') ?: null,
-                'env' => fn (): ?string => (string) (env($ekey) ?? '') ?: null,
                 default => null,
             };
 

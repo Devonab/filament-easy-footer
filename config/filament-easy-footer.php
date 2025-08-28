@@ -17,9 +17,6 @@ return [
         // how to resolve the local version if Composer fails
         'local_fallback' => 'config', // null | 'config' | 'env'
 
-        // keys for fallbacks
-        'local_config_key' => 'app.version',
-
         // optional labels for your view
         'labels' => [
             'installed' => 'Installed',
