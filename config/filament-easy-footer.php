@@ -19,7 +19,6 @@ return [
 
         // keys for fallbacks
         'local_config_key' => 'app.version',
-        'local_env_key'    => 'APP_VERSION',
 
         // optional labels for your view
         'labels' => [
