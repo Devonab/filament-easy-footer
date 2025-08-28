@@ -2,6 +2,7 @@
 
 namespace Devonab\FilamentEasyFooter\Livewire;
 
+use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Livewire\Component;
 
@@ -15,7 +16,12 @@ class GitHubVersion extends Component
 
     public ?string $repository = null;
 
-    public function mount(GitHubService $githubService): void
+    /** New fields for local control logic */
+    public ?string $installed = null;
+    public ?string $latest = null;
+    public bool $updatable = false;
+
+    public function mount(GitHubService $githubService, UpdateInfo $info): void
     {
         if (! $githubService->isEnabled()) {
             return;
@@ -24,7 +30,14 @@ class GitHubVersion extends Component
         $this->showLogo = $githubService->shouldShowLogo();
         $this->showUrl = $githubService->shouldShowUrl();
         $this->repository = config('filament-easy-footer.github.repository');
-        $this->version = $githubService->getLatestTag($this->repository);
+
+        // Use UpdateInfo instead of calling GitHubService again
+        $this->installed = $info->installed;
+        $this->latest    = $info->latest;
+        $this->updatable = $info->updatable;
+
+        // Keep old $version for existing blade partials (BC: shows "latest")
+        $this->version = $this->latest;
     }
 
     public function getGithubUrl(): string

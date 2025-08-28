@@ -125,10 +125,6 @@ class EasyFooterServiceProvider extends PackageServiceProvider
             $svc = $app->make(VersionComparisonService::class);
             return $svc->getUpdateInfo();
         });
-
-        view()->composer('filament-easy-footer::footer', function ($view) {
-            $view->with('info', app(UpdateInfo::class));
-        });
     }
 
     protected function getAssetPackageName(): ?string

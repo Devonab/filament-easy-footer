@@ -16,4 +16,20 @@ final class UpdateInfo
         public readonly bool $updatable
     ) {
     }
+
+    public function displayInstalled(): ?string
+    {
+        return $this->normalize($this->installed);
+    }
+
+    public function displayLatest(): ?string
+    {
+        return $this->normalize($this->latest);
+    }
+
+    private function normalize(?string $v): ?string
+    {
+        if (!$v) return null;
+        return str_starts_with($v, 'v') ? $v : 'v' . $v;
+    }
 }
