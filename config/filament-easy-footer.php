@@ -23,9 +23,9 @@ return [
         // optional labels for your view
         'labels' => [
             'installed' => 'Installed',
-            'latest'    => 'Latest',
+            'latest' => 'Latest',
             'updatable' => 'Update available',
-            'unknown'   => 'N/A',
+            'unknown' => 'N/A',
         ],
     ],
     'github' => [
