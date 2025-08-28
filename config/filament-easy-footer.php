@@ -15,7 +15,7 @@ return [
         'show_updatable_flag' => true,
 
         // how to resolve the local version if Composer fails
-        'local_fallback' => 'config', // null | 'config' | 'env'
+        'local_fallback' => 'config', // null | 'config'
 
         // optional labels for your view
         'labels' => [
