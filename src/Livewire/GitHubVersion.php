@@ -21,7 +21,8 @@ class GitHubVersion extends Component
 
     public ?string $latest = null;
 
-    public bool $updatable = false;
+    public ?UpdateInfo $updateInfo = null;
+
 
     public function mount(GitHubService $githubService, UpdateInfo $info): void
     {
@@ -34,12 +35,7 @@ class GitHubVersion extends Component
         $this->repository = config('filament-easy-footer.github.repository');
 
         // Use UpdateInfo instead of calling GitHubService again
-        $this->installed = $info->installed;
-        $this->latest = $info->latest;
-        $this->updatable = $info->updatable;
-
-        // Keep old $version for existing blade partials (BC: shows "latest")
-        $this->version = $this->latest;
+        $this->updateInfo = $info->installed;
     }
 
     public function getGithubUrl(): string
