@@ -32,9 +32,9 @@ final class LocalVersionService implements VersionServiceInterface
             $root = InstalledVersions::getRootPackage();
             $name = $root['name'] ?? null;
 
-            if (is_string($name) && $name !== '') {
+            if (null !== $name && $name !== '') {
                 $version = InstalledVersions::getPrettyVersion($name);
-                if (is_string($version) && $version !== '') {
+                if (null !== $version && $version !== '') {
                     return $version;
                 }
             }
