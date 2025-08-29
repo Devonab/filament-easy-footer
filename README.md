@@ -25,6 +25,7 @@ This filament Plugin provides an easy and flexible way to add a customizable foo
     - [Footer position](#footer-position)
     - [Custom sentence](#custom-sentence)
     - [Show GitHub version](#show-github-version)
+    - [Show installed & latest version together](#show-installed--latest-version-together)
     - [Show load time](#load-time)
     - [Custom logo with link](#custom-logo-with-link)
     - [Add customs links](#links)
@@ -230,6 +231,41 @@ return [
 ```
 
 If needed, you can generate a token [here](https://github.com/settings/personal-access-tokens). The token need to have at least the `read-only` permission on the "Contents" scope in Repository permissions.
+
+### Show installed & latest version together
+
+If you want to display both your **locally installed version** (from Composer) and the **latest GitHub release**, you can enable the extended project version mode.
+
+This feature only works in combination with `->withGithub()`:
+
+```php
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+
+->plugins([
+    EasyFooterPlugin::make()
+        ->withGithub(showLogo: true, showUrl: true)
+        ->withShowInstalledVersion(), // enable extended project version
+])
+```
+
+With this configuration, the footer will display:
+
+- **Installed**: the version currently installed in your project (from `composer.json` / `composer.lock`).
+- **Latest**: the latest available version from GitHub.
+- An **"Update available"** flag if a newer version exists.
+- Optionally the GitHub logo and repository link, if enabled.
+
+Example output:
+
+```
+© 2025 – MyApp
+v1.2.3
+Installed: v1.2.0
+Update available
+```
+
+Translations for the labels (`Installed`, `Update available`, `Unknown`) can be published and customized in the package’s `lang` files.
+
 
 ### Load time
 ![Filament Easy Footer load time](https://raw.githubusercontent.com/Devonab/filament-easy-footer/main/art/load_time.webp)
