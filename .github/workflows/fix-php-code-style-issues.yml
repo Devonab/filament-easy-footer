@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   php-code-styling:
+    if: github.repository == 'Devonab/filament-easy-footer'
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +26,6 @@ jobs:
       # if the maintainer wants auto-commits, fine – it runs only in the upstream repo.
       # but in forks this would just spam commits and is therefore disabled here.
       - name: Commit changes
-        if: github.repository == 'Devonab/filament-easy-footer'
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: Fix styling
