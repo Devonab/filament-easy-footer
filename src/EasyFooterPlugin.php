@@ -226,7 +226,7 @@ class EasyFooterPlugin implements Plugin
      */
     public function withShowInstalledVersion(bool $enabled = true): static
     {
-        $this->showInstalledVersion   = $enabled;
+        $this->showInstalledVersion = $enabled;
 
         return $this;
     }
