@@ -3,7 +3,6 @@
 use Devonab\FilamentEasyFooter\DTO\DisplayOptions;
 use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
-use ReflectionProperty;
 
 beforeEach(function () {
     config()->set('filament-easy-footer.versioning', []);
