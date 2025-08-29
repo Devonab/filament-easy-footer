@@ -29,25 +29,23 @@ final class LocalVersionService implements VersionServiceInterface
     public function getCurrentVersion(): ?string
     {
         try {
-            $root = InstalledVersions::getRootPackage();
-            $name = $root['name'] ?? null;
+            $root    = InstalledVersions::getRootPackage(); // array with guaranteed keys
+            $package = $root['name'];                       // string, non-null
+            $version = InstalledVersions::getPrettyVersion($package); // ?string
 
-            if ($name !== '') {
-                $version = InstalledVersions::getPrettyVersion($name);
-                if ($version !== '') {
-                    return $version;
-                }
+            if (is_string($version) && $version !== '') {
+                return $version;
             }
         } catch (\Throwable $e) {
             report($e);
         }
 
         if ($this->fallback !== null) {
-            $version = ($this->fallback)();
-
-            return is_string($version) && $version !== '' ? $version : null;
+            $fallbackVersion = ($this->fallback)();
+            return is_string($fallbackVersion) && $fallbackVersion !== '' ? $fallbackVersion : null;
         }
 
         return null;
     }
+
 }
