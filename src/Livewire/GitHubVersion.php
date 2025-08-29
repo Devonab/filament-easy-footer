@@ -34,7 +34,7 @@ class GitHubVersion extends Component
         $this->repository = config('filament-easy-footer.github.repository');
 
         // Use UpdateInfo instead of calling GitHubService again
-        $this->updateInfo = $info->installed;
+        $this->updateInfo = $info;
     }
 
     public function getGithubUrl(): string
