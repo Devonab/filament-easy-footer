@@ -13,7 +13,7 @@ it('mounts with update info and github data', function () {
 
     $updateInfo = new UpdateInfo('1.0.0', '1.1.0', true);
     $opts = new DisplayOptions(showLatest: true, showUpdatable: true);
-    $github = (new GitHubService())->enable(showLogo: true, showUrl: false);
+    $github = (new GitHubService)->enable(showLogo: true, showUrl: false);
 
     $component = new ProjectVersion;
     $component->mount($updateInfo, $github, $opts);
@@ -34,7 +34,7 @@ it('does not expose github data when service disabled', function () {
 
     $updateInfo = new UpdateInfo('1.0.0', '1.1.0', true);
     $opts = new DisplayOptions(showLatest: true, showUpdatable: true);
-    $github = new GitHubService(); // disabled by default
+    $github = new GitHubService; // disabled by default
 
     $component = new ProjectVersion;
     $component->mount($updateInfo, $github, $opts);
@@ -43,4 +43,3 @@ it('does not expose github data when service disabled', function () {
         ->and($component->showUrl)->toBeFalse()
         ->and($component->repository)->toBeNull();
 });
-

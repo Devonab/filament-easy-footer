@@ -6,12 +6,16 @@ use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Devonab\FilamentEasyFooter\Services\RemoteGithubVersionService;
 
 it('delegates fetching to GitHubService with given repo', function () {
-    $github = new class('v1.2.3') extends GitHubService {
+    $github = new class('v1.2.3') extends GitHubService
+    {
         public ?string $lastRepo = null;
+
         public function __construct(private string $tag) {}
+
         public function getLatestTag(?string $repository = null): string
         {
             $this->lastRepo = $repository;
+
             return $this->tag;
         }
     };
@@ -23,12 +27,16 @@ it('delegates fetching to GitHubService with given repo', function () {
 });
 
 it('passes null repository when none provided', function () {
-    $github = new class('v2.0.0') extends GitHubService {
+    $github = new class('v2.0.0') extends GitHubService
+    {
         public ?string $lastRepo = null;
+
         public function __construct(private string $tag) {}
+
         public function getLatestTag(?string $repository = null): string
         {
             $this->lastRepo = $repository;
+
             return $this->tag;
         }
     };
@@ -38,4 +46,3 @@ it('passes null repository when none provided', function () {
     expect($service->getCurrentVersion())->toBe('v2.0.0')
         ->and($github->lastRepo)->toBeNull();
 });
-

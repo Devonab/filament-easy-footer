@@ -6,8 +6,12 @@ use Devonab\FilamentEasyFooter\Services\Contracts\VersionServiceInterface;
 use Devonab\FilamentEasyFooter\Services\SemverVersionComparator;
 
 it('computes updatable correctly from installed and latest', function () {
-    $local = new class implements VersionServiceInterface {
-        public function getCurrentVersion(): ?string { return 'v1.2.3'; }
+    $local = new class implements VersionServiceInterface
+    {
+        public function getCurrentVersion(): ?string
+        {
+            return 'v1.2.3';
+        }
     };
     $cmp = new SemverVersionComparator;
 
@@ -21,8 +25,12 @@ it('computes updatable correctly from installed and latest', function () {
 });
 
 it('reports not updatable when installed equals latest', function () {
-    $local = new class implements VersionServiceInterface {
-        public function getCurrentVersion(): ?string { return '1.2.3'; }
+    $local = new class implements VersionServiceInterface
+    {
+        public function getCurrentVersion(): ?string
+        {
+            return '1.2.3';
+        }
     };
     $cmp = new SemverVersionComparator;
 
