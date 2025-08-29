@@ -16,8 +16,6 @@ class EasyFooterPlugin implements Plugin
     private array $hiddenPaths = ['admin/login', 'admin/register', 'admin/forgot-password'];
 
     protected bool $githubEnabled = false;
-
-    protected ?DisplayOptions $versioning = null;
     protected bool $showInstalledVersion = true;
 
     protected bool $borderTopEnabled = false;
@@ -121,12 +119,10 @@ class EasyFooterPlugin implements Plugin
      */
     protected function renderFooter(float $startTime): string
     {
-        $opts = $this->versioning ?? DisplayOptions::fromConfig();
-
         return view('filament-easy-footer::easy-footer', [
             'footerPosition' => $this->footerPosition,
             'githubEnabled' => $this->githubEnabled,
-            'versioning'     => $opts,
+            'showInstalledVersion' => $this->showInstalledVersion,
             'showLogo' => $this->showLogo,
             'showUrl' => $this->showUrl,
             'logoPath' => $this->logoPath,
@@ -230,22 +226,7 @@ class EasyFooterPlugin implements Plugin
      */
     public function withShowInstalledVersion(bool $enabled = true): static
     {
-        $this->versioning = new DisplayOptions(
-            showInstalled: $enabled,
-            showLatest:    (bool) (config('filament-easy-footer.versioning.show_latest') ?? true),
-            showUpdatable: (bool) (config('filament-easy-footer.versioning.show_updatable_flag') ?? true),
-        );
-        return $this;
-    }
-
-
-    /** New, preferred API */
-    public function withVersioning(DisplayOptions $options): static
-    {
-        $this->versioning = $options;
-        // mirror for BC consumers (blade expects $showInstalledVersion)
-        $this->showInstalledVersion = $options->showInstalled;
-
+        $this->showInstalledVersion = $enabled;
         return $this;
     }
 

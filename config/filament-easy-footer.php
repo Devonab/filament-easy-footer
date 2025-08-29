@@ -5,9 +5,6 @@ return [
     'app_name' => null,
 
     'versioning' => [
-        // toggle whether to show installed version from composer
-        'show_installed' => true,
-
         // toggle whether to fetch/display the latest GitHub version
         'show_latest' => true,
 

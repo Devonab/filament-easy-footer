@@ -52,7 +52,7 @@
       Controlled via config flag ($showInstalledVersion and withShowInstalledVersion()).
     --}}
     @if($githubEnabled)
-        @if($versioning->showInstalled)
+        @if($showInstalledVersion)
             <livewire:devonab.filament-easy-footer.project-version
                     :show-logo="$showLogo"
                     :show-url="$showUrl"
