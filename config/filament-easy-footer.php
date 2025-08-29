@@ -16,14 +16,6 @@ return [
 
         // how to resolve the local version if Composer fails
         'local_fallback' => 'config', // null | 'config'
-
-        // optional labels for your view
-        'labels' => [
-            'installed' => 'Installed',
-            'latest' => 'Latest',
-            'updatable' => 'Update available',
-            'unknown' => 'N/A',
-        ],
     ],
     'github' => [
         'repository' => null,

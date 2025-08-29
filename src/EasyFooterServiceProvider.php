@@ -48,6 +48,10 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
+
+        if (file_exists($package->basePath('/../resources/lang'))) {
+            $package->hasTranslations(); // loads from ../resources/lang
+        }
     }
 
     public function packageRegistered(): void {}
