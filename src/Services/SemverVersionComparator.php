@@ -32,19 +32,16 @@ final class SemverVersionComparator implements VersionComparatorInterface
         $aDev = $this->isDev($na);
         $bDev = $this->isDev($nb);
 
-        // dev-branch handling
-        switch (true) {
-            case $aDev && $bDev:
-                // dev vs dev → considered equal
-                return 0;
-
-            case $aDev && ! $bDev:
-                // dev vs release → dev is considered ahead
-                return 1;
-
-            case ! $aDev && $bDev:
-                // release vs dev → release is considered behind
-                return -1;
+        // Handle dev branches explicitly:
+        // - dev vs dev => equal (0)
+        // - dev vs release => dev ahead (1)
+        // - release vs dev => release behind (-1)
+        if ($aDev || $bDev) {
+            return match (true) {
+                $aDev && $bDev => 0,
+                $aDev          => 1,
+                default        => -1,
+            };
         }
 
         // both non-dev: fall back to semantic comparison
