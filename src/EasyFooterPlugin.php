@@ -16,6 +16,8 @@ class EasyFooterPlugin implements Plugin
 
     protected bool $githubEnabled = false;
 
+    protected bool $showInstalledVersion = true;
+
     protected bool $borderTopEnabled = false;
 
     protected bool $showLogo = true;
@@ -120,6 +122,7 @@ class EasyFooterPlugin implements Plugin
         return view('filament-easy-footer::easy-footer', [
             'footerPosition' => $this->footerPosition,
             'githubEnabled' => $this->githubEnabled,
+            'showInstalledVersion' => $this->showInstalledVersion,
             'showLogo' => $this->showLogo,
             'showUrl' => $this->showUrl,
             'logoPath' => $this->logoPath,
@@ -212,6 +215,18 @@ class EasyFooterPlugin implements Plugin
     public function withBorder(bool $enabled = true): static
     {
         $this->borderTopEnabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Configure if the local Version will be shown
+     *
+     * @return static EasyFooterPlugin
+     */
+    public function withShowInstalledVersion(bool $enabled = true): static
+    {
+        $this->showInstalledVersion   = $enabled;
 
         return $this;
     }

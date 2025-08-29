@@ -46,11 +46,23 @@
         @endif
     </span>
 
+    {{--
+      Switch between the original GitHubVersion component (remote tag only)
+      and the custom ProjectVersion component (installed + latest + updatable).
+      Controlled via config flag ($showInstalledVersion and withShowInstalledVersion()).
+    --}}
     @if($githubEnabled)
-        <livewire:devonab.filament-easy-footer.github-version
-            :show-logo="$showLogo"
-            :show-url="$showUrl"
-        />
+        @if($showInstalledVersion)
+            <livewire:devonab.filament-easy-footer.project-version
+                    :show-logo="$showLogo"
+                    :show-url="$showUrl"
+            />
+        @else
+            <livewire:devonab.filament-easy-footer.github-version
+                    :show-logo="$showLogo"
+                    :show-url="$showUrl"
+            />
+        @endif
     @endif
 
     @if($logoPath)

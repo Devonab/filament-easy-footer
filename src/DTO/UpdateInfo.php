@@ -16,12 +16,12 @@ final class UpdateInfo
         public readonly bool $updatable
     ) {}
 
-    public function displayInstalled(): ?string
+    public function getInstalled(): ?string
     {
         return $this->normalize($this->installed);
     }
 
-    public function displayLatest(): ?string
+    public function getLatest(): ?string
     {
         return $this->normalize($this->latest);
     }
