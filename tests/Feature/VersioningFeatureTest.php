@@ -5,6 +5,14 @@ use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use ReflectionProperty;
 
+beforeEach(function () {
+    config()->set('filament-easy-footer.versioning', []);
+});
+
+afterEach(function () {
+    app()->forgetInstance(EasyFooterPlugin::class);
+});
+
 function renderVersionView(UpdateInfo $info, DisplayOptions $options): string
 {
     $installed = $info->getInstalled() ?? (config('app.version') ? 'v' . config('app.version') : null);
@@ -20,6 +28,13 @@ function renderVersionView(UpdateInfo $info, DisplayOptions $options): string
         'showLogo' => false,
     ])->render();
 }
+
+it('defaults to showing latest and updatable when config keys are absent', function () {
+    $options = DisplayOptions::fromConfig();
+
+    expect($options->showLatest)->toBeTrue()
+        ->and($options->showUpdatable)->toBeTrue();
+});
 
 it('shows latest version when enabled in config', function () {
     config()->set('filament-easy-footer.versioning.show_latest', true);
@@ -88,4 +103,3 @@ it('can disable installed version display explicitly', function () {
 
     expect($property->getValue($plugin))->toBeFalse();
 });
-
