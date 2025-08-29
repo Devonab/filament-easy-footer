@@ -39,8 +39,8 @@ final class SemverVersionComparator implements VersionComparatorInterface
         if ($aDev || $bDev) {
             return match (true) {
                 $aDev && $bDev => 0,
-                $aDev          => 1,
-                default        => -1,
+                $aDev => 1,
+                default => -1,
             };
         }
 
