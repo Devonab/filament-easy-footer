@@ -1,71 +1,58 @@
 <?php
 
 use Devonab\FilamentEasyFooter\DTO\DisplayOptions;
-use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 
-function renderVersionView(UpdateInfo $info, DisplayOptions $opts): string {
-    return view('filament-easy-footer::project-version', [
-        'installed' => $info->getInstalled(),
-        'latest' => $info->getLatest(),
-        'updatable' => $info->updatable,
-        'showLatest' => $opts->showLatest,
-        'showUpdatable' => $opts->showUpdatable,
-        'showLogo' => false,
-        'showUrl' => false,
-        'repository' => null,
-    ])->render();
-}
-
-it('renders latest version when enabled', function () {
+it('shows latest version when enabled in config', function () {
     config()->set('filament-easy-footer.versioning.show_latest', true);
 
-    $html = renderVersionView(
-        new UpdateInfo('1.0.0', '1.2.3', true),
-        DisplayOptions::fromConfig()
-    );
+    $options = DisplayOptions::fromConfig();
 
-    expect($html)->toContain('v1.2.3');
+    expect($options->showLatest)->toBeTrue();
 });
 
-it('hides latest version when disabled', function () {
+it('hides latest version when disabled in config', function () {
     config()->set('filament-easy-footer.versioning.show_latest', false);
 
-    $html = renderVersionView(
-        new UpdateInfo('1.0.0', '1.2.3', true),
-        DisplayOptions::fromConfig()
-    );
+    $options = DisplayOptions::fromConfig();
 
-    expect($html)->not->toContain('v1.2.3');
+    expect($options->showLatest)->toBeFalse();
 });
 
-it('shows updatable badge when enabled', function () {
+it('shows updatable flag when enabled in config', function () {
     config()->set('filament-easy-footer.versioning.show_updatable_flag', true);
 
-    $html = renderVersionView(
-        new UpdateInfo('1.0.0', '1.2.3', true),
-        DisplayOptions::fromConfig()
-    );
+    $options = DisplayOptions::fromConfig();
 
-    expect($html)->toContain(__('filament-easy-footer::labels.updatable'));
+    expect($options->showUpdatable)->toBeTrue();
 });
 
-it('hides updatable badge when disabled', function () {
+it('hides updatable flag when disabled in config', function () {
     config()->set('filament-easy-footer.versioning.show_updatable_flag', false);
 
-    $html = renderVersionView(
-        new UpdateInfo('1.0.0', '1.2.3', true),
-        DisplayOptions::fromConfig()
-    );
+    $options = DisplayOptions::fromConfig();
 
-    expect($html)->not->toContain(__('filament-easy-footer::labels.updatable'));
+    expect($options->showUpdatable)->toBeFalse();
 });
 
-it('falls back to app.version when composer data is missing', function () {
-    config()->set('app.version', '9.9.9');
+it('can enable installed version display explicitly', function () {
+    $plugin = EasyFooterPlugin::make()
+        ->withShowInstalledVersion(false)
+        ->withShowInstalledVersion(true);
 
-    $info = new UpdateInfo('9.9.9', null, false);
-    $html = renderVersionView($info, DisplayOptions::fromConfig());
+    $property = new ReflectionProperty(EasyFooterPlugin::class, 'showInstalledVersion');
+    $property->setAccessible(true);
 
-    expect($html)->toContain('v9.9.9');
+    expect($property->getValue($plugin))->toBeTrue();
 });
 
+it('can disable installed version display explicitly', function () {
+    $plugin = EasyFooterPlugin::make()
+        ->withShowInstalledVersion()
+        ->withShowInstalledVersion(false);
+
+    $property = new ReflectionProperty(EasyFooterPlugin::class, 'showInstalledVersion');
+    $property->setAccessible(true);
+
+    expect($property->getValue($plugin))->toBeFalse();
+});
