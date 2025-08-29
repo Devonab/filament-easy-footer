@@ -6,7 +6,7 @@ return [
 
     'versioning' => [
         // toggle whether to fetch/display the latest GitHub version
-        'show_latest' => true,
+        'show_latest' => false,
 
         // whether to compute a boolean "updatable"
         'show_updatable_flag' => true,
