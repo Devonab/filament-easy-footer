@@ -248,12 +248,22 @@ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 ])
 ```
 
-With this configuration, the footer will display:
+#### Config section
 
-- **Installed**: the version currently installed in your project (from `composer.json` / `composer.lock`).
-- **Latest**: the latest available version from GitHub.
-- An **"Update available"** flag if a newer version exists.
-- Optionally the GitHub logo and repository link, if enabled.
+You can further control how versions are displayed by publishing and editing the config:
+
+```php
+'versioning' => [
+    // toggle whether to fetch/display the latest GitHub version
+    'show_latest' => false,
+
+    // whether to compute a boolean "updatable"
+    'show_updatable_flag' => true,
+
+    // how to resolve the local version if Composer fails
+    'local_fallback' => 'config', // null | 'config'
+],
+```
 
 Example output:
 
