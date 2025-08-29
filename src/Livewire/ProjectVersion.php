@@ -20,6 +20,7 @@ class ProjectVersion extends Component
 
     // display options (scalars!)
     public bool $showLatest = true;
+
     public bool $showUpdatable = true;
 
     // github link/visuals (layout like before)
@@ -35,7 +36,7 @@ class ProjectVersion extends Component
         $this->latest = $updateInfo->getLatest();
         $this->updatable = $updateInfo->updatable;
 
-        $this->showLatest    = $opts->showLatest;
+        $this->showLatest = $opts->showLatest;
         $this->showUpdatable = $opts->showUpdatable;
 
         // only use GitHubService for layout bits (no version call)
@@ -55,5 +56,4 @@ class ProjectVersion extends Component
     {
         return view('filament-easy-footer::project-version');
     }
-
 }

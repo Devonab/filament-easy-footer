@@ -2,7 +2,6 @@
 
 namespace Devonab\FilamentEasyFooter;
 
-use Devonab\FilamentEasyFooter\DTO\DisplayOptions;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -16,6 +15,7 @@ class EasyFooterPlugin implements Plugin
     private array $hiddenPaths = ['admin/login', 'admin/register', 'admin/forgot-password'];
 
     protected bool $githubEnabled = false;
+
     protected bool $showInstalledVersion = true;
 
     protected bool $borderTopEnabled = false;
@@ -227,9 +227,9 @@ class EasyFooterPlugin implements Plugin
     public function withShowInstalledVersion(bool $enabled = true): static
     {
         $this->showInstalledVersion = $enabled;
+
         return $this;
     }
-
 
     /**
      * Configure the footer position
