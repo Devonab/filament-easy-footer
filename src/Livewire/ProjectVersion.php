@@ -12,12 +12,16 @@ class ProjectVersion extends Component
 {
     // version info (scalars for Livewire)
     public ?string $installed = null;
+
     public ?string $latest = null;
+
     public bool $updatable = false;
 
     // github link/visuals (layout like before)
     public bool $showLogo = false;
+
     public bool $showUrl = false;
+
     public ?string $repository = null;
 
     public function mount(UpdateInfo $updateInfo, GitHubService $github): void
@@ -28,8 +32,8 @@ class ProjectVersion extends Component
 
         // only use GitHubService for layout bits (no version call)
         if ($github->isEnabled()) {
-            $this->showLogo   = $github->shouldShowLogo();
-            $this->showUrl    = $github->shouldShowUrl();
+            $this->showLogo = $github->shouldShowLogo();
+            $this->showUrl = $github->shouldShowUrl();
             $this->repository = config('filament-easy-footer.github.repository');
         }
     }
