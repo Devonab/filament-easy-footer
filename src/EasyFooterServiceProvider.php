@@ -112,6 +112,7 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         $this->app->bind(RemoteGithubVersionService::class, function ($app) {
             /** @var GitHubService $github */
             $github = $app->get(GitHubService::class);
+
             return new RemoteGithubVersionService($github);
         });
 
