@@ -32,6 +32,16 @@ final class UpdateInfo
             return null;
         }
 
+        // don't touch branch refs
+        if (str_starts_with($v, 'dev-')) {
+            return $v;
+        }
+
+        // don't show meaningless default
+        if ($v === '0.0') {
+            return null;
+        }
+
         return str_starts_with($v, 'v') ? $v : 'v' . $v;
     }
 }
