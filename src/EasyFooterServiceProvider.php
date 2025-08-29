@@ -2,6 +2,7 @@
 
 namespace Devonab\FilamentEasyFooter;
 
+use Devonab\FilamentEasyFooter\DTO\DisplayOptions;
 use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
 use Devonab\FilamentEasyFooter\Livewire\GitHubVersion;
 use Devonab\FilamentEasyFooter\Livewire\ProjectVersion;
@@ -88,6 +89,9 @@ class EasyFooterServiceProvider extends PackageServiceProvider
 
     protected function registerVersionClasses(): void
     {
+        $this->app->scoped(DisplayOptions::class, function () {
+            return DisplayOptions::fromConfig();
+        });
         $this->app->bind(VersionComparatorInterface::class, SemverVersionComparator::class);
 
         // Bind LocalVersionService with configurable fallback strategy

@@ -2,6 +2,7 @@
 
 namespace Devonab\FilamentEasyFooter;
 
+use Devonab\FilamentEasyFooter\DTO\DisplayOptions;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
@@ -16,6 +17,7 @@ class EasyFooterPlugin implements Plugin
 
     protected bool $githubEnabled = false;
 
+    protected ?DisplayOptions $versioning = null;
     protected bool $showInstalledVersion = true;
 
     protected bool $borderTopEnabled = false;
@@ -119,10 +121,12 @@ class EasyFooterPlugin implements Plugin
      */
     protected function renderFooter(float $startTime): string
     {
+        $opts = $this->versioning ?? DisplayOptions::fromConfig();
+
         return view('filament-easy-footer::easy-footer', [
             'footerPosition' => $this->footerPosition,
             'githubEnabled' => $this->githubEnabled,
-            'showInstalledVersion' => $this->showInstalledVersion,
+            'versioning'     => $opts,
             'showLogo' => $this->showLogo,
             'showUrl' => $this->showUrl,
             'logoPath' => $this->logoPath,
@@ -226,10 +230,25 @@ class EasyFooterPlugin implements Plugin
      */
     public function withShowInstalledVersion(bool $enabled = true): static
     {
-        $this->showInstalledVersion = $enabled;
+        $this->versioning = new DisplayOptions(
+            showInstalled: $enabled,
+            showLatest:    (bool) (config('filament-easy-footer.versioning.show_latest') ?? true),
+            showUpdatable: (bool) (config('filament-easy-footer.versioning.show_updatable_flag') ?? true),
+        );
+        return $this;
+    }
+
+
+    /** New, preferred API */
+    public function withVersioning(DisplayOptions $options): static
+    {
+        $this->versioning = $options;
+        // mirror for BC consumers (blade expects $showInstalledVersion)
+        $this->showInstalledVersion = $options->showInstalled;
 
         return $this;
     }
+
 
     /**
      * Configure the footer position
