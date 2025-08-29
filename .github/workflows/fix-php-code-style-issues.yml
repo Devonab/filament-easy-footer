@@ -9,6 +9,9 @@ permissions:
   contents: write
 
 jobs:
+  # maintainer note:
+  # if the maintainer wants auto-commits, fine – it runs only in the upstream repo.
+  # but in forks this would just spam commits and is therefore disabled here.
   php-code-styling:
     if: github.repository == 'Devonab/filament-easy-footer'
     runs-on: ubuntu-latest
@@ -22,9 +25,7 @@ jobs:
       - name: Fix PHP code style issues
         uses: aglipanci/laravel-pint-action@2.6
 
-      # maintainer note:
-      # if the maintainer wants auto-commits, fine – it runs only in the upstream repo.
-      # but in forks this would just spam commits and is therefore disabled here.
+
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v6
         with:
