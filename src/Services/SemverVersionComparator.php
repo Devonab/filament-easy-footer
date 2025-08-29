@@ -17,7 +17,7 @@ final class SemverVersionComparator implements VersionComparatorInterface
 {
     public function compare(?string $a, ?string $b): ?int
     {
-        if (!$a || !$b) {
+        if (! $a || ! $b) {
             return null;
         }
 
@@ -38,10 +38,10 @@ final class SemverVersionComparator implements VersionComparatorInterface
         }
 
         // dev vs non-dev => dev is considered ahead/higher
-        if ($aDev && !$bDev) {
+        if ($aDev && ! $bDev) {
             return 1;
         }
-        if (!$aDev && $bDev) {
+        if (! $aDev && $bDev) {
             return -1;
         }
 
@@ -52,18 +52,21 @@ final class SemverVersionComparator implements VersionComparatorInterface
     public function isLower(?string $a, ?string $b): bool
     {
         $cmp = $this->compare($a, $b);
+
         return $cmp !== null && $cmp < 0;
     }
 
     public function isEqual(?string $a, ?string $b): bool
     {
         $cmp = $this->compare($a, $b);
+
         return $cmp === 0;
     }
 
     public function isHigher(?string $a, ?string $b): bool
     {
         $cmp = $this->compare($a, $b);
+
         return $cmp !== null && $cmp > 0;
     }
 
@@ -76,6 +79,7 @@ final class SemverVersionComparator implements VersionComparatorInterface
         if ($v !== '' && ($v[0] === 'v' || $v[0] === 'V')) {
             $v = substr($v, 1);
         }
+
         return $v;
     }
 
