@@ -7,6 +7,7 @@ use ReflectionProperty;
 
 beforeEach(function () {
     config()->set('filament-easy-footer.versioning', []);
+    config()->set('app.version', '');
 });
 
 afterEach(function () {
