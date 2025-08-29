@@ -4,6 +4,7 @@ namespace Devonab\FilamentEasyFooter;
 
 use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
 use Devonab\FilamentEasyFooter\Livewire\GitHubVersion;
+use Devonab\FilamentEasyFooter\Livewire\ProjectVersion;
 use Devonab\FilamentEasyFooter\Services\Contracts\VersionComparatorInterface;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
 use Devonab\FilamentEasyFooter\Services\LocalVersionService;
@@ -124,6 +125,8 @@ class EasyFooterServiceProvider extends PackageServiceProvider
 
             return $svc->getUpdateInfo();
         });
+
+        Livewire::component('devonab.filament-easy-footer.project-version', ProjectVersion::class);
     }
 
     protected function getAssetPackageName(): ?string
