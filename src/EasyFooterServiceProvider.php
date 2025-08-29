@@ -111,10 +111,8 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         // Remote version service
         $this->app->bind(RemoteGithubVersionService::class, function ($app) {
             /** @var GitHubService $github */
-            $github = $app->make(GitHubService::class);
-            $repo = (string) $app['config']->get('filament-easy-footer.repo');
-
-            return new RemoteGithubVersionService($github, $repo);
+            $github = $app->get(GitHubService::class);
+            return new RemoteGithubVersionService($github);
         });
 
         // Compare service
