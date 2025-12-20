@@ -2,10 +2,19 @@
     use Filament\Support\Enums\Width;
     @endphp
 <footer
+    x-data="{ sidebarCollapsed: false }"
+    x-init="
+        sidebarCollapsed = $store.sidebar?.isOpen === false;
+        $watch('$store.sidebar.isOpen', value => {
+            sidebarCollapsed = value === false;
+        });
+    "
+    x-show="!(sidebarCollapsed && @js($footerPosition === 'sidebar.footer' || $footerPosition === 'sidebar'))"
+    x-transition
     @class([
         'fi-footer my-3 flex flex-wrap items-center justify-center text-sm text-gray-500 dark:text-gray-400',
         'border-t border-gray-200 dark:border-gray-700 text-center p-2' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer' || $borderTopEnabled === true,
-        'fi-sidebar gap-2 h-auto' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer',
+        'fi-sidebar h-fit gap-2 h-auto' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer',
         'gap-4' => $footerPosition !== 'sidebar' && $footerPosition !== 'sidebar.footer',
         'mx-auto w-full px-4 md:px-6 lg:px-8' => $footerPosition === 'footer',
         match ($maxContentWidth ??= (filament()->getMaxContentWidth() ?? Width::SevenExtraLarge)) {
@@ -34,7 +43,10 @@
         } => $footerPosition === 'footer',
     ])
 >
-    <span @class(['flex items-center gap-2' => $isHtmlSentence])>&copy; {{ now()->format('Y') }} -
+    <span @class([
+        'flex items-center gap-2' => $isHtmlSentence,
+        'w-full' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer'
+        ])>&copy; {{ now()->format('Y') }} -
         @if($sentence)
             @if($isHtmlSentence)
                 <span class="flex items-center gap-2">{!! $sentence !!}</span>
