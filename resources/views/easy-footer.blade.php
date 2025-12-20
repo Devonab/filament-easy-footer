@@ -3,6 +3,15 @@
 
 @endphp
 <footer
+    x-data="{ sidebarCollapsed: false }"
+    x-init="
+        sidebarCollapsed = $store.sidebar?.isOpen === false;
+        $watch('$store.sidebar.isOpen', value => {
+            sidebarCollapsed = value === false;
+        });
+    "
+    x-show="!(sidebarCollapsed && @js($footerPosition === 'sidebar.footer' || $footerPosition === 'sidebar'))"
+    x-transition
     @class([
         'fi-footer my-3 flex flex-wrap items-center justify-center text-sm text-gray-500 dark:text-gray-400',
         'border-t border-gray-200 dark:border-gray-700 text-center p-2' => $footerPosition === 'sidebar' || $footerPosition === 'sidebar.footer' || $borderTopEnabled === true,
