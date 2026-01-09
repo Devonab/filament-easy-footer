@@ -1,4 +1,4 @@
-const preset = require('./vendor/filament/filament/tailwind.config.preset')
+import preset from './tailwind.preset.js'
 
 module.exports = {
     presets: [preset],
@@ -9,3 +9,4 @@ module.exports = {
         './resources/views/**/*.blade.php',
     ],
 }
+
