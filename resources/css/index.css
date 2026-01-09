@@ -1,4 +1,7 @@
-@import '../../vendor/filament/filament/resources/css/theme.css';
+.fi-main {
+    @apply min-h-[calc(100dvh-6.5rem)] !h-auto;
+}
+
 
 .fi-footer > span {
     @apply text-center;
