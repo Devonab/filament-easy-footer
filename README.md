@@ -4,13 +4,16 @@
 ![Filament Easy Footer cover](https://raw.githubusercontent.com/Devonab/filament-easy-footer/main/art/cover.webp)
 
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/devonab/filament-easy-footer.svg?style=flat-square)](https://packagist.org/packages/devonab/filament-easy-footer)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)[![Total Downloads](https://img.shields.io/packagist/dt/devonab/filament-easy-footer.svg?style=flat-square)](https://packagist.org/packages/devonab/filament-easy-footer)
+[![Latest v2.x](https://img.shields.io/github/v/tag/devonab/filament-easy-footer?filter=v2.*&label=release%20v2.x&style=flat-square)](https://github.com/devonab/filament-easy-footer/releases)
+[![Tests](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![Code Style](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/devonab/filament-easy-footer.svg?style=flat-square)](https://packagist.org/packages/devonab/filament-easy-footer)
 
-> [!NOTE]  
-> You're using Filament `3.x` ? you can check out the compatible version [here](https://github.com/Devonab/filament-easy-footer/tree/filament-v3).
-
+| FilamentPHP | Package version | Branch                                                                          |
+|------------|-----------------|---------------------------------------------------------------------------------|
+| v3.x       | v1.x            | [filament-v3](https://github.com/Devonab/filament-easy-footer/tree/filament-v3) |
+| v4.x       | v2.x            | [main](https://github.com/Devonab/filament-easy-footer/tree/main)               |
+| v5.x       | v2.x            | [main](https://github.com/Devonab/filament-easy-footer/tree/main)               |
 This filament Plugin provides an easy and flexible way to add a customizable footer to your FilamentPHP application. This plugin integrates seamlessly with Filament's admin interface, enabling you to enhance your application's user experience with a good looking footer.
 
 ## Navigation
