@@ -14,6 +14,8 @@
 | v3.x       | v1.x            | [filament-v3](https://github.com/Devonab/filament-easy-footer/tree/filament-v3) |
 | v4.x       | v2.x            | [main](https://github.com/Devonab/filament-easy-footer/tree/main)               |
 | v5.x       | v2.x            | [main](https://github.com/Devonab/filament-easy-footer/tree/main)               |
+
+
 This filament Plugin provides an easy and flexible way to add a customizable footer to your FilamentPHP application. This plugin integrates seamlessly with Filament's admin interface, enabling you to enhance your application's user experience with a good looking footer.
 
 ## Navigation
