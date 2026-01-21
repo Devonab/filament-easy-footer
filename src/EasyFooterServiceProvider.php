@@ -2,8 +2,16 @@
 
 namespace Devonab\FilamentEasyFooter;
 
+use Devonab\FilamentEasyFooter\DTO\DisplayOptions;
+use Devonab\FilamentEasyFooter\DTO\UpdateInfo;
 use Devonab\FilamentEasyFooter\Livewire\GitHubVersion;
+use Devonab\FilamentEasyFooter\Livewire\ProjectVersion;
+use Devonab\FilamentEasyFooter\Services\Contracts\VersionComparatorInterface;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
+use Devonab\FilamentEasyFooter\Services\LocalVersionService;
+use Devonab\FilamentEasyFooter\Services\RemoteGithubVersionService;
+use Devonab\FilamentEasyFooter\Services\SemverVersionComparator;
+use Devonab\FilamentEasyFooter\Services\VersionComparisonService;
 use Devonab\FilamentEasyFooter\Testing\TestsEasyFooter;
 use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Filesystem\Filesystem;
@@ -41,6 +49,10 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
+
+        if (file_exists($package->basePath('/../resources/lang'))) {
+            $package->hasTranslations(); // loads from ../resources/lang
+        }
     }
 
     public function packageRegistered(): void {}
@@ -54,6 +66,8 @@ class EasyFooterServiceProvider extends PackageServiceProvider
                 cacheTtl: config('filament-easy-footer.github.cache_ttl', 3600),
             );
         });
+
+        $this->registerVersionClasses();
 
         Livewire::component('devonab.filament-easy-footer.github-version', GitHubVersion::class);
 
@@ -71,6 +85,55 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         }
 
         Testable::mixin(new TestsEasyFooter);
+    }
+
+    protected function registerVersionClasses(): void
+    {
+        $this->app->scoped(DisplayOptions::class, function () {
+            return DisplayOptions::fromConfig();
+        });
+        $this->app->bind(VersionComparatorInterface::class, SemverVersionComparator::class);
+
+        // Bind LocalVersionService with configurable fallback strategy
+        $this->app->bind(LocalVersionService::class, function ($app) {
+            $cfg = $app['config']->get('filament-easy-footer.versioning', []);
+            $mode = $cfg['local_fallback'] ?? 'config';
+            $ckey = $cfg['local_config_key'] ?? 'app.version';
+
+            $fallback = match ($mode) {
+                'config' => fn (): ?string => ($app['config']->get($ckey) ?? '') ?: null,
+                default => null,
+            };
+
+            return new LocalVersionService($fallback);
+        });
+
+        // Remote version service
+        $this->app->bind(RemoteGithubVersionService::class, function ($app) {
+            /** @var GitHubService $github */
+            $github = $app->get(GitHubService::class);
+
+            return new RemoteGithubVersionService($github);
+        });
+
+        // Compare service
+        $this->app->bind(VersionComparisonService::class, function ($app) {
+            return new VersionComparisonService(
+                $app->make(LocalVersionService::class),
+                $app->make(RemoteGithubVersionService::class),
+                $app->make(VersionComparatorInterface::class),
+            );
+        });
+
+        // updateInfo Factory
+        $this->app->scoped(UpdateInfo::class, function ($app) {
+            /** @var VersionComparisonService $svc */
+            $svc = $app->make(VersionComparisonService::class);
+
+            return $svc->getUpdateInfo();
+        });
+
+        Livewire::component('devonab.filament-easy-footer.project-version', ProjectVersion::class);
     }
 
     protected function getAssetPackageName(): ?string
