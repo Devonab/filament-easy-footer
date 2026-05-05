@@ -63,10 +63,12 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         );
 
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
-                $this->publishes([
-                    $file->getRealPath() => base_path("stubs/filament-easy-footer/{$file->getFilename()}"),
-                ], 'filament-easy-footer-stubs');
+            if (is_dir(__DIR__ . '/../stubs/')) {
+                foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
+                    $this->publishes([
+                        $file->getRealPath() => base_path("stubs/filament-easy-footer/{$file->getFilename()}"),
+                    ], 'filament-easy-footer-stubs');
+                }
             }
         }
 
