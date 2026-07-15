@@ -3,7 +3,9 @@
 namespace Devonab\FilamentEasyFooter;
 
 use Devonab\FilamentEasyFooter\Livewire\GitHubVersion;
+use Devonab\FilamentEasyFooter\Livewire\ProjectVersion;
 use Devonab\FilamentEasyFooter\Services\GitHubService;
+use Devonab\FilamentEasyFooter\Services\ProjectVersionService;
 use Devonab\FilamentEasyFooter\Testing\TestsEasyFooter;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -44,6 +46,10 @@ class EasyFooterServiceProvider extends PackageServiceProvider
         if (file_exists($package->basePath('/../resources/views'))) {
             $package->hasViews(static::$viewNamespace);
         }
+
+        if (file_exists($package->basePath('/../resources/lang'))) {
+            $package->hasTranslations();
+        }
     }
 
     public function packageRegistered(): void {}
@@ -58,7 +64,15 @@ class EasyFooterServiceProvider extends PackageServiceProvider
             );
         });
 
+        $this->app->singleton(ProjectVersionService::class, function ($app) {
+            return new ProjectVersionService(
+                github: $app->make(GitHubService::class),
+                localFallbackConfigKey: config('filament-easy-footer.versioning.local_fallback_config_key'),
+            );
+        });
+
         Livewire::component('devonab.filament-easy-footer.github-version', GitHubVersion::class);
+        Livewire::component('devonab.filament-easy-footer.project-version', ProjectVersion::class);
 
         FilamentAsset::register(
             $this->getAssets(),
