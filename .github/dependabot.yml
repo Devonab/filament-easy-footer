@@ -10,7 +10,6 @@ updates:
       interval: "weekly"
     cooldown:
       default-days: 5
-      semver-major-days: 14
     labels:
       - "dependencies"
 
