@@ -30,6 +30,7 @@ This filament Plugin provides an easy and flexible way to add a customizable foo
     - [Footer position](#footer-position)
     - [Custom sentence](#custom-sentence)
     - [Show GitHub version](#show-github-version)
+    - [Show installed version](#show-installed-version)
     - [Show load time](#load-time)
     - [Custom logo with link](#custom-logo-with-link)
     - [Add customs links](#links)
@@ -213,6 +214,53 @@ GITHUB_TOKEN= # Recommended but not compulsory for all repos, required for priva
 GITHUB_CACHE_TTL= # in seconds, 3600 by default
 ```
 If needed, you can generate a token [here](https://github.com/settings/personal-access-tokens). The token need to have at least the `read-only` permission on the "Contents" scope in Repository permissions.
+
+### Show installed version
+
+You can show the **currently installed Composer version** of your application in the footer by using this configuration :
+```php
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+
+->plugins([
+    EasyFooterPlugin::make()
+    ->withShowInstalledVersion()
+])
+```
+
+This works independently of `->withGithub()` and does not perform any GitHub API call: it only reads the version Composer resolved for your application.
+
+If you also want to compare it against the **latest GitHub release** and flag when an update is available, combine it with `->withGithub()` :
+```php
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+
+->plugins([
+    EasyFooterPlugin::make()
+    ->withGithub()
+    ->withShowInstalledVersion(showLatest: true, showUpdatable: true)
+])
+```
+- showLatest : Display the latest GitHub release next to the installed version
+- showUpdatable : Display an "available" badge when the installed version is older than the latest release
+
+`showLatest` and `showUpdatable` require `->withGithub()` to be enabled, since they need to fetch the latest tag from GitHub.
+
+If Composer cannot resolve the installed version (for example, the application isn't checked out from its VCS), you can provide a fallback config key that will be read instead :
+
+```php
+return [
+    'app_name' => null,
+
+    'github' => [
+        'repository' => null,
+        'token' => null,
+        'cache_ttl' => 3600,
+    ],
+
+    'versioning' => [
+        'local_fallback_config_key' => null, # e.g. 'app.version'
+    ],
+];
+```
 
 ### Load time
 ![Filament Easy Footer load time](https://raw.githubusercontent.com/Devonab/filament-easy-footer/main/art/load_time.webp)

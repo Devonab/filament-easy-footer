@@ -15,6 +15,12 @@ class EasyFooterPlugin implements Plugin
 
     protected bool $githubEnabled = false;
 
+    protected bool $showInstalledVersion = false;
+
+    protected bool $showLatestWithInstalled = false;
+
+    protected bool $showUpdatableFlag = false;
+
     protected bool $borderTopEnabled = false;
 
     protected bool $showLogo = true;
@@ -119,6 +125,9 @@ class EasyFooterPlugin implements Plugin
         return view('filament-easy-footer::easy-footer', [
             'footerPosition' => $this->footerPosition,
             'githubEnabled' => $this->githubEnabled,
+            'showInstalledVersion' => $this->showInstalledVersion,
+            'showLatestWithInstalled' => $this->showLatestWithInstalled,
+            'showUpdatableFlag' => $this->showUpdatableFlag,
             'showLogo' => $this->showLogo,
             'showUrl' => $this->showUrl,
             'logoPath' => $this->logoPath,
@@ -199,6 +208,27 @@ class EasyFooterPlugin implements Plugin
         $this->githubEnabled = true;
         $this->showLogo = $showLogo;
         $this->showUrl = $showUrl;
+
+        return $this;
+    }
+
+    /**
+     * Show the locally installed Composer version in the footer.
+     *
+     * Works independently of ->withGithub(): enabling it alone shows only the
+     * installed version, with no GitHub API call. Passing $showLatest or
+     * $showUpdatable additionally requires ->withGithub() to be active, since
+     * they need the latest tag to compare against.
+     *
+     * @param  bool  $showLatest  Show the latest GitHub tag next to the installed version
+     * @param  bool  $showUpdatable  Show an "update available" badge when installed < latest
+     * @return static EasyFooterPlugin
+     */
+    public function withShowInstalledVersion(bool $enabled = true, bool $showLatest = false, bool $showUpdatable = false): static
+    {
+        $this->showInstalledVersion = $enabled;
+        $this->showLatestWithInstalled = $showLatest;
+        $this->showUpdatableFlag = $showUpdatable;
 
         return $this;
     }
