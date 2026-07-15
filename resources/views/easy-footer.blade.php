@@ -58,7 +58,14 @@
         @endif
     </span>
 
-    @if($githubEnabled)
+    @if($showInstalledVersion)
+        <livewire:devonab.filament-easy-footer.project-version
+            :show-logo="$showLogo"
+            :show-url="$showUrl"
+            :show-latest="$showLatestWithInstalled"
+            :show-updatable="$showUpdatableFlag"
+        />
+    @elseif($githubEnabled)
         <livewire:devonab.filament-easy-footer.github-version
             :show-logo="$showLogo"
             :show-url="$showUrl"
