@@ -70,11 +70,16 @@ This is the contents of the published config file:
 
 ```php
 return [
-    'app_name' => env('APP_NAME', 'Filament Footer'),
+    'app_name' => null,
+
     'github' => [
-        'repository' => env('GITHUB_REPOSITORY', ''),
-        'token' => env('GITHUB_TOKEN', ''),
-        'cache_ttl' => env('GITHUB_CACHE_TTL', 3600)
+        'repository' => null,
+        'token' => null,
+        'cache_ttl' => 3600,
+    ],
+
+    'versioning' => [
+        'local_fallback_config_key' => null,
     ],
 ];
 ```
@@ -206,13 +211,20 @@ use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 - showLogo : Display the GitHub logo next to the version
 - showUrl : Add an `<a>` tag to the Github URL around the logo
 
-To make this one work, you need to add this keys to our .env file :
+To make this one work, you need to publish the plugin configuration file and set the following keys :
 
-```bash
-GITHUB_REPOSITORY=user/name-of-the-repo
-GITHUB_TOKEN= # Recommended but not compulsory for all repos, required for private repos
-GITHUB_CACHE_TTL= # in seconds, 3600 by default
+```php
+return [
+    'app_name' => null,
+
+    'github' => [
+        'repository' => null, #user/name-of-the-repo
+        'token' => null, # Recommended but not compulsory for all repos, required for private repos
+        'cache_ttl' => 3600, # in seconds, 3600 by default
+    ],
+];
 ```
+
 If needed, you can generate a token [here](https://github.com/settings/personal-access-tokens). The token need to have at least the `read-only` permission on the "Contents" scope in Repository permissions.
 
 ### Show installed version
