@@ -7,6 +7,7 @@
 [![Latest v2.x](https://img.shields.io/github/v/tag/devonab/filament-easy-footer?filter=v2.*&label=release%20v2.x&style=flat-square)](https://github.com/devonab/filament-easy-footer/releases)
 [![Tests](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![Code Style](https://img.shields.io/github/actions/workflow/status/devonab/filament-easy-footer/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/devonab/filament-easy-footer/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+[![Plumb score](https://plumbphp.dev/badges/devonab/filament-easy-footer/composite.svg)](https://plumbphp.dev/devonab/filament-easy-footer)
 [![Total Downloads](https://img.shields.io/packagist/dt/devonab/filament-easy-footer.svg?style=flat-square)](https://packagist.org/packages/devonab/filament-easy-footer)
 
 | FilamentPHP | Package version | Branch                                                                          |
