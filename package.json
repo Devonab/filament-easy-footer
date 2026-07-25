@@ -20,7 +20,7 @@
         "postcss": "^8.4.26",
         "prettier": "^3.9.5",
         "prettier-plugin-tailwindcss": "^0.8.0",
-        "tailwindcss": "^4.3.2"
+        "tailwindcss": "^4.3.3"
     },
     "dependencies": {
         "@tailwindcss/cli": "^4.3.2"
